@@ -1,0 +1,16 @@
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /usr/local/openresty/logs/short_access.log
+  json.keys_under_root: true
+  json.add_error_key: true
+
+output.kafka:
+  hosts: ["localhost:9092"]
+  topic: short_link_log
+  compression: gzip
+  max_message_bytes: 1048576
+
+logging.level: info
