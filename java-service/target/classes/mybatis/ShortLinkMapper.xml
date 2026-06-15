@@ -1,0 +1,22 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shortlink.mapper.ShortLinkMapper">
+
+    <select id="selectByShortCode" resultType="com.shortlink.entity.ShortLinkDO">
+        SELECT * FROM short_link WHERE short_code = #{shortCode} AND status = 1
+    </select>
+
+    <select id="selectByUrlMd5" resultType="com.shortlink.entity.ShortLinkDO">
+        SELECT * FROM short_link WHERE url_md5 = #{urlMd5} AND status = 1
+    </select>
+
+    <delete id="deleteExpiredOrDisabled">
+        DELETE FROM short_link 
+        WHERE (status != 1 OR expire_at < #{expireAt}) 
+        LIMIT #{limit}
+    </delete>
+
+</mapper>

@@ -1,0 +1,25 @@
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://prod-mysql:3306/db_shortlink?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=true
+
+  data:
+    redis:
+      host: prod-redis
+      port: 6379
+      password: ${REDIS_PASSWORD}
+
+  kafka:
+    bootstrap-servers: prod-kafka:9092
+
+shortlink:
+  limit:
+    max-qps: 100000
+    burst-capacity: 10000
+
+logging:
+  level:
+    com.shortlink: INFO
